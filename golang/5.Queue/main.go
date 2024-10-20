@@ -56,13 +56,11 @@ func (q *Queue) show() []string {
 	}
 	tmpNode := q.Front
 
-   
-
 	nodeList := make([]string, 0, q.Size)
 
 	for tmpNode != nil {
 		nodeList = append(nodeList, tmpNode.Data)
-       
+
 		tmpNode = tmpNode.Next
 	}
 	return nodeList
@@ -90,18 +88,18 @@ func main() {
 
 	fmt.Printf("show data %+v\n", queue.show())
 	fmt.Printf("show Size %+v\n", queue.Size)
-    fmt.Println("===========")
-    queue.deQueue()
-    queue.deQueue()
-    queue.deQueue()
-    queue.deQueue()
-    queue.deQueue()
-    queue.deQueue()
+	fmt.Println("===========")
+	queue.deQueue()
+	queue.deQueue()
+	queue.deQueue()
+	queue.deQueue()
+	queue.deQueue()
+	queue.deQueue()
 	fmt.Printf("show peek %+v\n", queue.peek())
 	fmt.Printf("show Size %+v\n", queue.Size)
-    fmt.Println("===========")
+	fmt.Println("===========")
 
-    queue.enQueue("asad")
+	queue.enQueue("asad")
 	fmt.Printf("show peek %+v\n", queue.peek())
 	fmt.Printf("show Size %+v\n", queue.Size)
 
