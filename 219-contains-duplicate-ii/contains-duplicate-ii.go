@@ -1,21 +1,18 @@
 func containsNearbyDuplicate(nums []int, k int) bool {
-    window := make(map[int]bool) // A map to simulate the sliding window (acting as a set)
+    
+    numsMap:=make(map[int]int)
 
-    for i, value := range nums {
-        // If the value already exists in the window, return true
-        if window[value] {
+    for index, _ := range nums{
+        
+        valPosition, ok:= numsMap[nums[index]]
+
+        if ok && index != valPosition && (index- valPosition) <=k{
             return true
         }
 
-        // Add the current value to the window
-        window[value] = true
-
-        // Ensure the window size does not exceed k
-        if len(window) > k {
-            // Remove the oldest element from the window
-            delete(window, nums[i-k])
-        }
+        numsMap[nums[index]] = index    
     }
 
-    return false // No duplicates found within range k
+    return false
+
 }
