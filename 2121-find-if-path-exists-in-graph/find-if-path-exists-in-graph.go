@@ -5,7 +5,7 @@ func validPath(n int, edges [][]int, source int, destination int) bool {
 
 	vertixs := convertEdge(n, edges)
 
-	fmt.Println("vertixs: ", vertixs)
+	//fmt.Println("vertixs: ", vertixs)
 
 	visited := make(map[int]bool)
 
@@ -19,7 +19,7 @@ func validPath(n int, edges [][]int, source int, destination int) bool {
 		
 
 		stack = stack[:len(stack)-1]
-    if current == destination {
+        if current == destination {
 			return true
 		}
 		
