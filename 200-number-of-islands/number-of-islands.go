@@ -1,10 +1,10 @@
 func dfs(grid [][]byte, row, col int) {
-	stack := [][]int{{row, col}}
+	queue := [][]int{{row, col}}
 
-	for len(stack) > 0 {
+	for len(queue) > 0 {
 		//fmt.Println("stack: ", stack)
-		curr := stack[len(stack)-1]
-		stack = stack[:len(stack)-1]
+		curr := queue[0]
+		queue = queue[1:]
 
 		r, c := curr[0], curr[1]
 
@@ -14,10 +14,10 @@ func dfs(grid [][]byte, row, col int) {
 
 		grid[r][c] = '0'
 
-		stack = append(stack, []int{r + 1, c})
-		stack = append(stack, []int{r - 1, c})
-		stack = append(stack, []int{r, c + 1})
-		stack = append(stack, []int{r, c - 1})
+		queue = append(queue, []int{r + 1, c})
+		queue = append(queue, []int{r - 1, c})
+		queue = append(queue, []int{r, c + 1})
+		queue = append(queue, []int{r, c - 1})
 	}
 }
 
