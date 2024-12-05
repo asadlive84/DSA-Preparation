@@ -5,26 +5,8 @@ func dailyTemperatures(temperatures []int) []int {
 
 	for i := len(temperatures) - 1; i >= 0; i-- {
 		//fmt.Println("stack::", stack, " ", " i ", i, " ", temperatures[i], " result ", result)
-		if len(stack) == 0 {
-			stack = append(stack, i)
-			result[i] = 0
-			continue
-		}
 
-		if temperatures[i] == temperatures[stack[len(stack)-1]] {
-
-			stack = stack[:len(stack)-1]
-			if len(stack) == 0 {
-				stack = append(stack, i)
-				result[i] = 0
-				continue
-			}
-			result[i] = stack[len(stack)-1] - i
-			stack = append(stack, i)
-			continue
-		}
-
-		for len(stack) != 0 && temperatures[i] > temperatures[stack[len(stack)-1]] {
+		for len(stack) > 0 && temperatures[i] > temperatures[stack[len(stack)-1]] {
 			stack = stack[:len(stack)-1]
 		}
 
