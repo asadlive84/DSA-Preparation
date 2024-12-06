@@ -1,11 +1,5 @@
 func isValid(s string) bool {
-
-	pMap := make(map[string]string)
-
-	pMap[")"] = "("
-	pMap["}"] = "{"
-	pMap["]"] = "["
-
+	pMap := map[string]string{"}": "{", ")": "(", "]": "["}
 	stack := []string{}
 	for i := 0; i < len(s); i++ {
 		if string(s[i]) == "(" || string(s[i]) == "[" || string(s[i]) == "{" {
@@ -25,8 +19,5 @@ func isValid(s string) bool {
 		}
 	}
 
-	if len(stack) == 0 {
-		return true
-	}
-	return false
+	return len(stack) == 0
 }
