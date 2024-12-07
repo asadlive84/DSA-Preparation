@@ -1,5 +1,5 @@
 func longestValidParentheses(s string) int {
-	//count := 0
+
 	stack := []int{}
 	idex := make([]int, len(s))
 	for i := 0; i < len(s); i++ {
@@ -16,7 +16,7 @@ func longestValidParentheses(s string) int {
 			}
 		}
 	}
-	//fmt.Println("idex ::", idex)
+
 	max := 0
 	for i := 0; i < len(s); i++ {
 		currentVal := 0
