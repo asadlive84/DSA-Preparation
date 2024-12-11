@@ -1,6 +1,6 @@
 func moveZeroes(nums []int) {
 
-	newNums := make([]int, len(nums))
+	newNums := make([]int, len(nums), len(nums))
 	i := 0
 	for _, data := range nums {
 
