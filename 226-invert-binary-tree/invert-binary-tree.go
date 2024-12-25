@@ -19,7 +19,7 @@ func invertTree(root *TreeNode) *TreeNode {
 		queue = queue[1:]
 
 		
-			curr.Left, curr.Right = curr.Right, curr.Left
+		curr.Left, curr.Right = curr.Right, curr.Left
 		
 
 		if curr.Left != nil {
