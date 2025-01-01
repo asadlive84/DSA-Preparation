@@ -3,9 +3,8 @@ func simplifyPath(path string) string {
 	pathList := strings.Split(path, "/")
 
 	for _, data := range pathList {
-		if data == "" {
-			continue
-		} else if data == "." {
+		//fmt.Println("data==> ", data)
+		if data == "" || data == "." {
 			continue
 		} else if data == ".." {
 			if len(stack) > 0 {
@@ -17,6 +16,6 @@ func simplifyPath(path string) string {
 			stack = append(stack, data)
 		}
 	}
-	//fmt.Println(stack)
+	//fmt.Println("stack ", stack)
 	return "/" + strings.Join(stack, "/")
 }
