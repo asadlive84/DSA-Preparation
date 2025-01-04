@@ -1,32 +1,36 @@
-func minRemoveToMakeValid(s string) string {
-	stack := []int{}
-	index := make([]bool, len(s))
+type Value struct {
+	Data  string
+	Index int
+}
 
-	for i := 0; i < len(s); i++ {
-		if s[i] == '(' {
-			stack = append(stack, i)
-		} else {
-			if len(stack) == 0 {
-				continue
-			} else if s[i] == ')' && s[stack[len(stack)-1]] == '(' {
-				index[i] = true
-				index[stack[len(stack)-1]] = true
+func minRemoveToMakeValid(data string) string {
+	stack := []Value{}
+	runeData := []rune(data)
+
+	for index, d := range runeData {
+		if d == ')' {
+			if len(stack) > 0 && stack[len(stack)-1].Data == "(" {
 				stack = stack[:len(stack)-1]
+			} else {
+				stack = append(stack, Value{Data: string(d), Index: index})
 			}
+
+		} else if d == '(' {
+			stack = append(stack, Value{Data: string(d), Index: index})
 		}
 	}
 
-	newStr := ""
-	for i := 0; i < len(s); i++ {
-		if s[i] == '(' || s[i] == ')' {
-			if index[i] {
-				newStr += string(s[i])
-			}
-		} else {
-			newStr += string(s[i])
+	removeIndices := make(map[int]bool)
+
+	for _, data := range stack {
+		removeIndices[data.Index] = true
+	}
+	info := []rune{}
+	for index, _ := range runeData {
+		if !removeIndices[index] {
+			info = append(info, runeData[index])
 		}
 	}
 
-	return newStr
-
+	return string(info)
 }
