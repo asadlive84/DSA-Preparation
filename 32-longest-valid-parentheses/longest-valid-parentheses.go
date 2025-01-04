@@ -1,35 +1,40 @@
+type Paren struct {
+	Data  rune
+	Index int
+}
+
 func longestValidParentheses(s string) int {
 
-	stack := []int{}
-	idex := make([]int, len(s))
-	for i := 0; i < len(s); i++ {
-
-		if s[i] == '(' {
-			stack = append(stack, i)
-		} else {
-			if len(stack) == 0 {
-				continue
-			} else if s[i] == ')' && s[stack[len(stack)-1]] == '(' {
-				idex[i] = 1
-				idex[stack[len(stack)-1]] = 1
+	dataRune := []rune(s)
+	stack := []Paren{}
+	n := make([]int, len(s), len(s))
+	fmt.Println(":n:", n, len(dataRune))
+	for i, data := range dataRune {
+		if data == ')' {
+			if len(stack) > 0 && stack[len(stack)-1].Data == '(' {
+				n[i] = 1
+				n[stack[len(stack)-1].Index] = 1
 				stack = stack[:len(stack)-1]
+			} else {
+				continue
 			}
+		} else if data == '(' {
+			stack = append(stack, Paren{Data: data, Index: i})
+
 		}
 	}
 
+	count := 0
 	max := 0
-	for i := 0; i < len(s); i++ {
-		currentVal := 0
-		for j := i; j < len(s); j++ {
-			if idex[j] == 0 {
-				break
-			}
-			currentVal += idex[j]
-
+	for _, d := range n {
+		if d == 1 {
+			count++
+		} else {
+			count = 0
 		}
 
-		if currentVal > max {
-			max = currentVal
+		if count > max {
+			max = count
 		}
 	}
 
