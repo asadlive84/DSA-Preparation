@@ -8,15 +8,13 @@ func longestValidParentheses(s string) int {
 	dataRune := []rune(s)
 	stack := []Paren{}
 	n := make([]int, len(s), len(s))
-	fmt.Println(":n:", n, len(dataRune))
+	//fmt.Println(":n:", n, len(dataRune))
 	for i, data := range dataRune {
 		if data == ')' {
 			if len(stack) > 0 && stack[len(stack)-1].Data == '(' {
 				n[i] = 1
 				n[stack[len(stack)-1].Index] = 1
 				stack = stack[:len(stack)-1]
-			} else {
-				continue
 			}
 		} else if data == '(' {
 			stack = append(stack, Paren{Data: data, Index: i})
