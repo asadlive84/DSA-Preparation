@@ -30,7 +30,7 @@ func lengthOfLongestSubstring(s string) int {
 		right++
 	}
 
-	fmt.Println(wordMap)
+	//fmt.Println(wordMap)
 	return maxCount
 
 }
