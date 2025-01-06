@@ -1,34 +1,36 @@
-func lengthOfLongestSubstring(str string) int {
-
-	stringMap := make(map[string]int)
+func lengthOfLongestSubstring(s string) int {
+	strRune := []rune(s)
+	wordMap := make(map[string]int)
 
 	left := 0
 	right := 0
-	maxlength := 0
+
+	maxCount := 0
 	for left <= right {
-		if right >= len(str) {
+
+		if right >= len(strRune) {
 			break
 		}
 
-		if position, ok := stringMap[string(str[right])]; !ok {
-			stringMap[string(str[right])] = right
-
+		if _, ok := wordMap[string(strRune[right])]; !ok {
+			wordMap[string(strRune[right])] = right
 		} else {
-			if stringMap[string(str[right])] >= left {
-				left = position + 1
+			if wordMap[string(strRune[right])] >= left {
+				left = wordMap[string(strRune[right])] + 1
 			}
 
-			stringMap[string(str[right])] = right
+			wordMap[string(strRune[right])] = right
 		}
 
-		currentLength := right - left + 1
-		if currentLength > maxlength {
-			maxlength = currentLength
+		count := right - left + 1
+		if count > maxCount {
+			maxCount = count
 		}
+
 		right++
-
 	}
 
-	return maxlength
+	fmt.Println(wordMap)
+	return maxCount
 
 }
