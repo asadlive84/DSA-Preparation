@@ -1,22 +1,20 @@
-func productExceptSelf(nums []int) []int {
-	leftArr := make([]int, len(nums))
-	leftArr[0] = 1
-	first := 1
-	for i := 1; i < len(nums); i++ {
-		first = first * nums[i-1]
-		leftArr[i] = first
+func productExceptSelf(arr []int) []int {
+	arr1, arr2 := make([]int, len(arr), len(arr)), make([]int, len(arr), len(arr))
+	prev, last := 1, 1
+	arr1[0], arr2[len(arr2)-1] = prev, last
+	for i := 1; i < len(arr); i++ {
+		prev = prev * arr[i-1]
+		arr1[i] = prev
 	}
 
-	rightArr := make([]int, len(nums))
-	rightArr[len(nums)-1] = 1
-	last := 1
-	for i := len(nums) - 2; i >= 0; i-- {
-		last = last * nums[i+1]
-		rightArr[i] = last
+	for j := len(arr) - 2; j >= 0; j-- {
+		last = last * arr[j+1]
+		arr2[j] = last
 	}
 
-	for i, _ := range nums {
-		nums[i] = leftArr[i] * rightArr[i]
+	for i := 0; i < len(arr); i++ {
+		arr[i] = arr1[i] * arr2[i]
 	}
-	return nums
+	fmt.Println(arr1)
+	return arr
 }
