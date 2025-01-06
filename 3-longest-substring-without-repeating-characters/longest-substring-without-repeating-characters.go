@@ -12,11 +12,11 @@ func lengthOfLongestSubstring(s string) int {
 			break
 		}
 
-		if _, ok := wordMap[string(strRune[right])]; !ok {
+		if position, ok := wordMap[string(strRune[right])]; !ok {
 			wordMap[string(strRune[right])] = right
 		} else {
-			if wordMap[string(strRune[right])] >= left {
-				left = wordMap[string(strRune[right])] + 1
+			if position >= left {
+				left = position + 1
 			}
 
 			wordMap[string(strRune[right])] = right
