@@ -1,20 +1,27 @@
-func gridTraveller(row, col int, memo map[string]int) int {
-	if data, ok := memo[fmt.Sprintf("%d, %d", row, col)]; ok {
-		return data
-	}
+func uniquePaths(row, col int) int {
+	grid := gridConvert(row, col)
+	for row := 0; row < len(grid); row++ {
+		for col := 0; col < len(grid[0]); col++ {
 
-	if row == 1 && col == 1 {
-		return 1
-	}
-	if row == 0 || col == 0 {
-		return 0
-	}
+			curr := grid[row][col]
 
-	memo[fmt.Sprintf("%d, %d", row, col)] = gridTraveller(row-1, col, memo) + gridTraveller(row, col-1, memo)
-	return memo[fmt.Sprintf("%d, %d", row, col)]
+			if row+1 < len(grid) {
+				grid[row+1][col] = grid[row+1][col] + curr
+			}
+			if col+1 < len(grid[0]) {
+				grid[row][col+1] = grid[row][col+1] + curr
+			}
+
+		}
+	}
+	return grid[len(grid)-1][len(grid[0])-1]
 }
 
-func uniquePaths(m int, n int) int {
-    memo := make(map[string]int)
-    return gridTraveller(m,n, memo)
+func gridConvert(row, col int) [][]int {
+	grid := make([][]int, row+1)
+	for i:= range grid{
+        grid[i]= make([]int, col+1)
+    }
+	grid[1][1] = 1
+	return grid
 }
