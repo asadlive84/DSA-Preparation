@@ -1,41 +1,29 @@
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
-}
+func longestCommonSubsequence(fStr, lStr string) int {
 
-func lcs(text1, text2 []rune, i, j int, memo [][]int) int {
+	totalRow := len(lStr)
+	totalCol := len(fStr)
 
-	if i >= len(text1) || j >= len(text2) {
-		return 0
-	}
-	if memo[i][j] != -1 {
-		return memo[i][j]
+	table := make([][]int, totalRow+1)
+
+	for index, _ := range table {
+		table[index] = make([]int, totalCol+1)
 	}
 
-	if text1[i] == text2[j] {
-		memo[i][j] = 1 + lcs(text1, text2, i+1, j+1, memo)
-		//return memo[fmt.Sprintf("%d,%d", i, j)]
-	} else {
-		memo[i][j] = max(lcs(text1, text2, i+1, j, memo), lcs(text1, text2, i, j+1, memo))
-	}
-	return memo[i][j]
-
-}
-
-func longestCommonSubsequence(text1 string, text2 string) int {
-
-	text1Rune := []rune(text1)
-	text2Rune := []rune(text2)
-	memo := make([][]int, len(text1Rune))
-
-	for i, _ := range memo {
-		memo[i] = make([]int, len(text2Rune))
-		for j, _ := range memo[i] {
-			memo[i][j] = -1
+	for r := 1; r <= totalRow; r++ {
+		for c := 1; c <= totalCol; c++ {
+			if lStr[r-1] == fStr[c-1] {
+				table[r][c] = 1 + table[r-1][c-1]
+			} else {
+				max := table[r-1][c]
+				if table[r][c-1] > max {
+					max = table[r][c-1]
+				}
+				table[r][c] = max
+			}
 		}
 	}
 
-	return lcs(text1Rune, text2Rune, 0, 0, memo)
+	//fmt.Println(table)
+
+	return table[totalRow][totalCol]
 }
