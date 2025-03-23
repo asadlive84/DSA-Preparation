@@ -1,18 +1,12 @@
+
 func isSubsequence(s string, t string) bool {
 
-	left := 0
-	right := 0
+	left, right := 0, 0
 
-	for left <= right {
-
-		if left == len(s) {
-			return true
-		}
-
-		if right >= len(t) {
-			return false
-		}
-
+	for right < len(t) {
+        if left == len(s){
+            return true
+        }
 		if s[left] == t[right] {
 			left++
 
@@ -21,5 +15,5 @@ func isSubsequence(s string, t string) bool {
 
 	}
 
-	return false
+	return left == len(s)
 }
