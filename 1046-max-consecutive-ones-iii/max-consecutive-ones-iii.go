@@ -1,15 +1,13 @@
 func longestOnes(nums []int, k int) int {
 
-	left, right := 0, 0
+	left := 0
 
 	countZero := 0
 	maxCount := 0
 
-	for left <= right {
+	for right:=0; right < len(nums); right++ {
 
-		if right >= len(nums) {
-			break
-		}
+		
 
 		if nums[right] == 0 {
 			countZero++
@@ -27,7 +25,7 @@ func longestOnes(nums []int, k int) int {
 		if count > maxCount {
 			maxCount = count
 		}
-		right++
+		
 	}
 
 	return maxCount
