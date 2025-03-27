@@ -1,32 +1,25 @@
 func longestOnes(nums []int, k int) int {
 
-	left := 0
+	left, withZero, maxLength := 0, 0, 0
 
-	countZero := 0
-	maxCount := 0
-
-	for right:=0; right < len(nums); right++ {
-
-		
+	for right := 0; right < len(nums); right++ {
 
 		if nums[right] == 0 {
-			countZero++
+			withZero++
 		}
 
-		for countZero > k {
+		for withZero > k {
 			if nums[left] == 0 {
-				countZero--
+				withZero--
 			}
 			left++
 		}
 
-		count := right - left + 1
-
-		if count > maxCount {
-			maxCount = count
+		sum := right - left + 1
+		if sum > maxLength {
+			maxLength = sum
 		}
-		
 	}
 
-	return maxCount
+	return maxLength
 }
