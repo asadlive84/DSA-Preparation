@@ -1,3 +1,4 @@
+-- Write your PostgreSQL query statement below
 SELECT MAX(SecondHighestSalary) AS SecondHighestSalary
 FROM (
     SELECT salary AS SecondHighestSalary
