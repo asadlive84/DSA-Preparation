@@ -1,11 +1,3 @@
 -- Write your PostgreSQL query statement below
-SELECT MAX(SecondHighestSalary) AS SecondHighestSalary
-FROM (
-    SELECT salary AS SecondHighestSalary
-    FROM (
-        SELECT salary,
-               DENSE_RANK() OVER (ORDER BY salary DESC) AS rnk
-        FROM Employee
-    ) ranked
-    WHERE rnk = 2
-) t;
+
+select max(salary) as SecondHighestSalary from Employee where salary not in (select max(salary) from Employee)
